@@ -68,11 +68,6 @@
             return false;
         };
 
-        // Evento quando o usuário para de tocar na imagem (fim do toque)
-        mic.addEventListener('touchend', function(event) {
-            playRandomAudio(); // Toca o áudio aleatório
-        });
-
         // Função para tocar um áudio aleatório
         function playRandomAudio() {
             const audioFiles = [
@@ -84,9 +79,13 @@
             // Tenta reproduzir o áudio
             audio.play().catch(error => {
                 console.error("Erro ao reproduzir áudio:", error);
-                alert("Por favor, toque na tela para permitir a reprodução de áudio.");
+                alert("Por favor, clique/toque na tela para permitir a reprodução de áudio.");
             });
         }
+
+        // Adiciona eventos para dispositivos touch e desktop
+        mic.addEventListener('touchend', playRandomAudio); // Para dispositivos móveis
+        mic.addEventListener('mouseup', playRandomAudio); // Para desktops
 
         // Garante que o usuário interaja com a página antes de permitir a reprodução de áudio
         document.addEventListener('click', function() {
