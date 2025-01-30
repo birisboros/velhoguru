@@ -38,20 +38,15 @@
             height: 100%;
             object-fit: cover;
         }
-        button {
+        .clickable-image {
             margin-top: 20px;
-            padding: 12px 24px;
-            font-size: 30px;
+            width: 50px; /* Ajuste o tamanho da imagem conforme necessário */
+            height: 50px;
             cursor: pointer;
-            background: linear-gradient(45deg, #ff8c00, #e63900);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-family: 'Tangerine', cursive;
-            box-shadow: 0 0 10px rgba(255, 140, 0, 0.8);
+            border-radius: 50%; /* Para manter o estilo circular, se desejar */
             transition: transform 0.3s ease;
         }
-        button:hover {
+        .clickable-image:hover {
             transform: scale(1.1);
         }
     </style>
@@ -61,7 +56,8 @@
     <div class="image-container">
         <img src="guru.webp" alt="Imagem Centralizada">
     </div>
-    <button onmouseup="playRandomAudio()">Falar</button>
+    <!-- Substitua "placeholder-image.jpg" pelo caminho da sua imagem -->
+    <img src="mic.png" alt="Clique para falar" class="clickable-image" onclick="playRandomAudio()">
     <script>
         function playRandomAudio() {
             const audioFiles = [
