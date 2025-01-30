@@ -39,7 +39,6 @@
             object-fit: cover;
         }
         .clickable-image {
-           
             margin-top: 20px;
             width: 50px; /* Ajuste o tamanho da imagem conforme necessário */
             height: 50px;
@@ -57,23 +56,43 @@
     <div class="image-container">
         <img src="guru.webp" alt="Imagem Centralizada">
     </div>
-    <!-- Substitua "placeholder-image.jpg" pelo caminho da sua imagem -->
-    <img src="mic.png" alt="Clique para falar" id="mic" class="clickable-image" onclick="playRandomAudio()" oncontextmenu="return false;">
+    <!-- Substitua "mic.png" pelo caminho da sua imagem -->
+    <img src="mic.png" alt="Clique para falar" id="mic" class="clickable-image" oncontextmenu="return false;">
     <script>
-        document.getElementById('mic').oncontextmenu = function(event) {
-    event.preventDefault();
-    event.stopPropagation(); // not necessary in my case, could leave in case stopImmediateProp isn't available? 
-    event.stopImmediatePropagation();
-    return false;
-};
+        const mic = document.getElementById('mic');
+
+        // Bloqueia o menu de contexto (botão direito) na imagem do microfone
+        mic.oncontextmenu = function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        };
+
+        // Evento quando o usuário para de tocar na imagem (fim do toque)
+        mic.addEventListener('touchend', function(event) {
+            playRandomAudio(); // Toca o áudio aleatório
+        });
+
+        // Função para tocar um áudio aleatório
         function playRandomAudio() {
             const audioFiles = [
                 'audio1.ogg', 'audio2.ogg', 'audio3.ogg', 'audio4.ogg'
             ];
             const randomAudio = audioFiles[Math.floor(Math.random() * audioFiles.length)];
             const audio = new Audio(randomAudio);
-            audio.play();
+
+            // Tenta reproduzir o áudio
+            audio.play().catch(error => {
+                console.error("Erro ao reproduzir áudio:", error);
+                alert("Por favor, toque na tela para permitir a reprodução de áudio.");
+            });
         }
+
+        // Garante que o usuário interaja com a página antes de permitir a reprodução de áudio
+        document.addEventListener('click', function() {
+            // Este evento é apenas para garantir que o usuário interaja com a página
+            console.log("Interação do usuário detectada.");
+        }, { once: true }); // Executa apenas uma vez
     </script>
 </body>
 </html>
