@@ -58,13 +58,14 @@
         <img src="guru.webp" alt="Imagem Centralizada">
     </div>
     <!-- Substitua "placeholder-image.jpg" pelo caminho da sua imagem -->
-    <img src="mic.png" alt="Clique para falar" class="clickable-image" onclick="playRandomAudio()" oncontextmenu="return false;">
+    <img src="mic.png" alt="Clique para falar" id="mic" class="clickable-image" onclick="playRandomAudio()" oncontextmenu="return false;">
     <script>
-        window.oncontextmenu = function(event) {
-             event.preventDefault();
-             event.stopPropagation();
-             return false;
-            };
+        document.getElementById('mic').oncontextmenu = function(event) {
+    event.preventDefault();
+    event.stopPropagation(); // not necessary in my case, could leave in case stopImmediateProp isn't available? 
+    event.stopImmediatePropagation();
+    return false;
+};
         function playRandomAudio() {
             const audioFiles = [
                 'audio1.ogg', 'audio2.ogg', 'audio3.ogg', 'audio4.ogg'
