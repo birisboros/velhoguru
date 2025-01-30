@@ -60,6 +60,11 @@
     <!-- Substitua "placeholder-image.jpg" pelo caminho da sua imagem -->
     <img src="mic.png" alt="Clique para falar" class="clickable-image" onclick="playRandomAudio()" oncontextmenu="return false;">
     <script>
+        window.oncontextmenu = function(event) {
+             event.preventDefault();
+             event.stopPropagation();
+             return false;
+            };
         function playRandomAudio() {
             const audioFiles = [
                 'audio1.ogg', 'audio2.ogg', 'audio3.ogg', 'audio4.ogg'
