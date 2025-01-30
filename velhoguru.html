@@ -61,21 +61,15 @@
     <div class="image-container">
         <img src="guru.webp" alt="Imagem Centralizada">
     </div>
-    <button onclick="startListening()">Falar</button>
+    <button onmouseup="playRandomAudio()">Falar</button>
     <script>
-        function startListening() {
-            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-            recognition.lang = 'pt-BR';
-            recognition.start();
-
-            recognition.onresult = function(event) {
-                const audioFiles = [
-                    'audio1.ogg', 'audio2.ogg', 'audio3.ogg', 'audio4.ogg'
-                ];
-                const randomAudio = audioFiles[Math.floor(Math.random() * audioFiles.length)];
-                const audio = new Audio(randomAudio);
-                audio.play();
-            };
+        function playRandomAudio() {
+            const audioFiles = [
+                'audio1.ogg', 'audio2.ogg', 'audio3.ogg', 'audio4.ogg'
+            ];
+            const randomAudio = audioFiles[Math.floor(Math.random() * audioFiles.length)];
+            const audio = new Audio(randomAudio);
+            audio.play();
         }
     </script>
 </body>
